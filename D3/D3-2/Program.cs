@@ -24,12 +24,7 @@ Console.WriteLine(File
     })
     .Chunk(int.MaxValue) // ?????????? sorry
     .Select(chunk => chunk
-        .Aggregate((current, next) => new
-        {
-            Numbers = current.Numbers.Concat(next.Numbers), 
-            Gears = current.Gears.Concat(next.Gears)
-        })
-        .Gears
+        .SelectMany(gears => gears.Gears)
         .Select(gear => gear with
         {
             Numbers = chunk

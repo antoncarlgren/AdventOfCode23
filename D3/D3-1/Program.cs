@@ -24,12 +24,7 @@ Console.WriteLine(File
     })
     .Chunk(int.MaxValue) // ?????????? sorry
     .Select(chunk => chunk
-        .Aggregate((current, next) => new
-        {
-            Numbers = current.Numbers.Concat(next.Numbers), 
-            Gears = current.Gears.Concat(next.Gears)
-        })
-        .Numbers
+        .SelectMany(numbers => numbers.Numbers)
         .Where(num => chunk
             .SelectMany(parts => parts.Gears)
             .Any(part => Enumerable.Range(num.Line - 1, 3).Contains(part.Line) 
